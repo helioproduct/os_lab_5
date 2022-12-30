@@ -1,9 +1,14 @@
-# FLAGS = -std=c11 -pedantic -Wall -Werror
+FLAGS = -g -pedantic -std=c11 -Wall -Werror
 
-all: run
+static_main: static_main.c
+	gcc $(FLAGS) -c static_main.c
 
-run: main.c
-	gcc $(FLAGS) main.c -o run
+
+dynamic1: declaration.h implementation1.c
+	gcc $(FLAGS) -shared -o libimpl1.so -fPIC implementation1.c
+
+dynamic2: declaration.h implementation2.c
+	gcc $(FLAGS) -shared -o libimpl2.so -fPIC implementation2.c
 
 clean:
-	rm -f run
+	rm -rf *.o *.so solution
