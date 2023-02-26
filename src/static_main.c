@@ -8,9 +8,7 @@ int main(void)
     while (scanf("%d", &q) > 0)
     {
         float arg1, arg2, result;
-
         scanf("%f %f", &arg1, &arg2);
-        
         if (q == 1)
         {
             result = Derivative(arg1, arg2);
