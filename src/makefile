@@ -1,19 +1,25 @@
+CC = gcc
 FLAGS = -g -pedantic -std=c11 -Wall -Werror
 
-static1: static_main dynamic1
-	gcc $(FLAGS) static_main.o -L. libimpl1.so -o main
+# Update $LD_LIBRARY_PATH
+# export LD_LIBRARY_PATH=$(pwd):$LD_LIBRARY_PATH
 
-static2: static_main dynamic2
-	gcc $(FLAGS) static_main.o -L. libimpl2.so -o main
+# lib1
+functions1: functions.h functions1.c
+	$(CC) $(FLAGS) -lm -shared -fPIC functions1.c -o libfuns1.so 
+
+# lib2
+functions2: functions.h functions2.c
+	$(CC) $(FLAGS) -lm -shared -fPIC functions1.c -o libfuns2.so 
 
 static_main: static_main.c
-	gcc $(FLAGS) -c static_main.c
+	$(CC) $(FLAGS) -lm -c static_main.c -o static_main.o
 
-dynamic1: declaration.h implementation1.c
-	gcc $(FLAGS) -shared -o libimpl1.so -fPIC implementation1.c -lm
+static1: functions1 static_main
+	$(CC) -L. static_main.o -lfuns1 -o static1
 
-dynamic2: declaration.h implementation2.c
-	gcc $(FLAGS) -shared -o libimpl2.so -fPIC implementation2.c -lm
+static2: functions2 static_main
+	$(CC) -L. static_main.o -lfuns2 -o static2
 
 clean:
-	rm -rf *.o *.so main
+	rm *.o *.so static1 static2

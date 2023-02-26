@@ -1,27 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "functions.h"
 
-#include "declaration.h"
-
-int main(void)      
+int main(void)
 {
-    // float f = derivative(0, 0.01);
-    // printf("%f", f);
-
-
-    int n;
-    int x, y;
-    while (scanf("%d", &n) > 0)
+    int q;
+    while (scanf("%d", &q) > 0)
     {
-        if (n == 1)
+        float arg1, arg2, result;
+
+        scanf("%f %f", &arg1, &arg2);
+        
+        if (q == 1)
         {
-            
+            result = Derivative(arg1, arg2);
         }
-        else if (n == 2)
-        {
-            
+        else if (q == 2)
+        {  
+            result = Square(arg1, arg2);
         }
+        printf("%f\n", result);
     }
+
     return 0;
 }
-
