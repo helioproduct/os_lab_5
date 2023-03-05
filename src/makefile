@@ -21,5 +21,8 @@ static1: functions1 static_main
 static2: functions2 static_main
 	$(CC) -L. static_main.o -lfuns2 -o static2
 
+dynamic: functions1 functions2
+	$(CC) $(FLAGS) dynamic.c -o dynamic
+ 
 clean:
 	rm *.o *.so static1 static2
