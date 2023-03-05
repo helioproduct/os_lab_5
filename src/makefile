@@ -1,6 +1,6 @@
 CC = gcc
 FLAGS = -g -pedantic -std=c11 -Wall -Werror
-BIN = dynamic_main static1 static2 *.o
+BIN = dynamic_main static1 static2 *.o *.so
 
 # Update $LD_LIBRARY_PATH
 # export LD_LIBRARY_PATH=$(pwd):$LD_LIBRARY_PATH
