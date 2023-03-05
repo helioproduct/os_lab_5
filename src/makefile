@@ -1,5 +1,6 @@
 CC = gcc
 FLAGS = -g -pedantic -std=c11 -Wall -Werror
+BIN = dynamic_main static1 static2 *.o
 
 # Update $LD_LIBRARY_PATH
 # export LD_LIBRARY_PATH=$(pwd):$LD_LIBRARY_PATH
@@ -21,8 +22,10 @@ static1: functions1 static_main
 static2: functions2 static_main
 	$(CC) -L. static_main.o -lfuns2 -o static2
 
-dynamic: functions1 functions2
-	$(CC) $(FLAGS) dynamic.c -o dynamic
+dynamic_main: functions1 functions2
+	$(CC) $(FLAGS) dynamic_main.c -o dynamic_main
  
+all: functions1 functions2 static1 static2 dynamic_main
+
 clean:
-	rm *.o *.so static1 static2
+	rm $(BIN)
