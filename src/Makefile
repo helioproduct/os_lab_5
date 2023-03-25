@@ -11,7 +11,7 @@ functions1: functions.h functions1.c
 
 # lib2
 functions2: functions.h functions2.c
-	$(CC) $(FLAGS) -lm -shared -fPIC functions1.c -o libfuns2.so 
+	$(CC) $(FLAGS) -lm -shared -fPIC functions2.c -o libfuns2.so 
 
 static_main: static_main.c
 	$(CC) $(FLAGS) -lm -c static_main.c -o static_main.o

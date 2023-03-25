@@ -18,7 +18,7 @@ int main(void)
     float (*Square)(float, float);
 
     *(void**) (&Derivative) = dlsym(handle, FUN1_NAME);
-    *(void**) (&Square) = dlsym(handle, FUN1_NAME);
+    *(void**) (&Square) = dlsym(handle, FUN2_NAME);
 
     int command;
     while (scanf("%d", &command) == 1)
@@ -39,18 +39,17 @@ int main(void)
             } 
             else 
             {
-                handle = dlopen(DYN_LIB_2, RTLD_LAZY);
+                handle = dlopen(DYN_LIB_1, RTLD_LAZY);
                 lib_number = 1;
             }
-
             if (handle == NULL) 
             {
                 printf("dlopen error\n");
                 return 2;
             }
             *(void**) (&Derivative) = dlsym(handle, FUN1_NAME);
-            *(void**) (&Square) = dlsym(handle, FUN1_NAME);
-            printf("switched libs\n");
+            *(void**) (&Square) = dlsym(handle, FUN2_NAME);
+            printf("switched libs to lib%d\n", lib_number);
             break;
         
         // Derivative
